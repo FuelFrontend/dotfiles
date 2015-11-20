@@ -41,6 +41,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+
+# To set node packages path
+export PATH="$HOME/.npm-packages/bin:$PATH"
+
 ##Shortcuts
 alias s='git status'
 
@@ -57,6 +61,17 @@ alias at="open -a 'Atom'"
 # Start local server
 alias server='python -m SimpleHTTPServer'
 
+#Update everything OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+# Thanks to addy osmani dotfiless
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; sudo gem update --system; sudo gem update'
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+
+# Kill all the tabs in All Chrome to free up memory
+# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+alias kt="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
 # List all files colorized in long format
 alias l='ls -l ${colorflag}'
 
@@ -65,7 +80,6 @@ alias f="open -a Finder"
 alias ip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias rm="=rm -rf"
-alias idm="wine ~/.wine/drive_c/Program\ Files/Internet\ Download\ Manager/IDMan.exe"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
@@ -80,44 +94,6 @@ alias npmg="sudo npm install -g"
 alias npmu="sudo npm update"
 alias bi="bower install"
 
-##end of shortcuts
-
-# To set node packages path
-export PATH="$HOME/.npm-packages/bin:$PATH"
-
-## Shortcuts:
-alias s='git status'
-
-# Easy Navigation:
-alias ..="cd .."
-alias ...="cd ../.."
-alias p="cd ~/practices"
-alias w="cd ~/workspace"
-
-# Tools:
-alias st="open -a 'Sublime Text'"
-alias at="open -a 'Atom'"
-
-# Start local server:
-alias server='python -m SimpleHTTPServer'
-
-# List all files colorized in long format:
-alias l='ls -l ${colorflag}'
-
-# Utilities:
-alias f="open -a Finder"
-alias ip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-alias rm="=rm -rf"
-
-# Reload the shell (i.e. invoke as a login shell):
-alias reload="exec $SHELL -l"
-
-# Show/hide hidden files in Finder:
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-
-
 ##To set node packages path
 # Allow global npm install without sudo
 # Taken from: https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
@@ -128,11 +104,5 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 # command
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-# Node & Bower:
-alias npmi="sudo npm install"
-alias npmg="sudo npm install -g"
-alias npmu="sudo npm update"
-alias bi="bower install"
 
 ## end of shortcuts
