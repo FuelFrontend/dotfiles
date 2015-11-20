@@ -12,35 +12,43 @@ custom_echo() {
 custom_echo "Your OS X development machine is just a few steps away"
 custom_echo "Author: https://github.com/gokulkrish"
 
-# Set up git global values
-custom_echo '\e[1;34m%-6s\e[m' "==> Setting git global configuration <=="
+# Setting up git config & .gitignore
+custom_echo "==> Setting Git Config <=="
 cp gitignore ~/.gitignore_global
 git config --global core.excludesfile '~/.gitignore_global'
-git config --global user.email "<Your Email>" #Change this to your email id
-git config --global user.name "<Your Password>" #Change this to your username
+
+#Get user's git email id
+custom_echo "Enter Your Github Email:"
+read emailId
+git config --global user.email "$emailId"
+
+#Get user's git username
+custom_echo "Enter Your Github Username:"
+read userName
+git config --global user.name "$userName"
 
 #Install Oh My Zsh
-custom_echo '\e[1;34m%-6s\e[m' "==> Installating Oh My Zsh <=="
+custom_echo "==> Installating Oh My Zsh <== \n"
 curl -L http://install.ohmyz.sh | sh
 
 #Copy zshrc config
-custom_echo '\e[1;34m%-6s\e[m'  "==> Copying shortcuts <=="
-custom_echo '\e[1;34m%-6s\e[m'  "==> Check your .zshrc file for more details <=="
+custom_echo  "==> Copying shortcuts <=="
+custom_echo  "==> Check your .zshrc file for more details <=="
 cp zshrc ~/.zshrc
 
 #Install Homebrew
-custom_echo '\e[1;34m%-6s\e[m'  "==> Installing Homebrew <=="
+custom_echo  "==> Installing Homebrew <== \n"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 #Install node
-custom_echo '\e[1;34m%-6s\e[m'  "==> Installing Node.js <=="
+custom_echo  "==> Installing NodeJS <=="
 brew install node
 
 #Set up npm for global install without sudo
-custom_echo '\e[1;34m%-6s\e[m'  "==> Set up npm for global install without sudo <=="
+custom_echo  "==> Set up npm for global install without sudo <=="
 cp npmrc ~/.npmrc
 mkdir "${HOME}/.npm-packages"
 
 #Install commonly used npm and generator-smacss etc.
-custom_echo '\e[1;34m%-6s\e[m'  "==> Installing commonly used npm modules & generators <=="
+custom_echo "==> Installing commonly used npm modules & generators <== \n"
 npm install -g gulp grunt-cli jshint yo generator-mocha@0.1.0 generator-smacss
